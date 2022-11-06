@@ -1,0 +1,73 @@
+#clearfix::after {
+    display: flex;
+    flex-direction: column;
+    content: "";
+    clear: both;
+    display: table;
+}
+#buttonconteiner {
+    padding-left: 8pt;
+    padding-right: 8pt;
+    justify-content: right;
+}
+#Button {
+	box-shadow: 0px 1px 0px 0px #fce2c1;
+	background:linear-gradient(to bottom, #ffc477 5%, #fb9e25 100%);
+	background-color:#ffc477;
+	border-radius:22px;
+	border:1px solid #eeb44f;
+	display:inline-block;
+	cursor:pointer;
+	color:#0c0c0c;
+	font-family:Arial;
+	font-size:19px;
+	font-weight:bold;
+	padding:15px 15px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #cc9f52;
+    width: 250px;
+}
+#Button:hover {
+	background:linear-gradient(to bottom, #fb9e25, #ffc477);
+	background-color:#fb9e25;
+}
+#Button:active {
+	position:relative;
+	top:1px;
+}
+#inibox{
+    width: 100%;
+    padding: 20px;
+}
+#box {
+    float: left;
+    width: 100%;
+    padding: 5px;
+}
+#tittlefont {
+    font-family: "AR BERKLEY", cursive, sans-serif;
+    font-size: 55px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #050404;
+    font-weight: 700;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    text-align: left;
+}
+#introfont {
+    font-family: "Calibri", Palatino, serif;
+    font-size: 25px;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    padding-left: 8pt;
+    padding-right: 8pt;
+}

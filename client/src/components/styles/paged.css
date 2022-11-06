@@ -1,0 +1,28 @@
+.pages {
+    display: flex;
+	height: 20px;
+    /* list-style-type:none; */
+    justify-content: center;
+	padding: 4px;
+    margin: 0px;
+}
+
+.page {
+    list-style-type:none; 
+    margin: 1px;  
+}
+
+.pageBtn {
+    background-color:whitesmoke;
+    font-weight:bold;
+    color: black;
+    border: 0px;
+}
+
+.pageBtn :hover {
+    background-color:rgb(96, 136, 146);
+    font-weight:bold;
+    color: white;
+    border: 1px;
+}
+
