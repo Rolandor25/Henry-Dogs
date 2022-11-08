@@ -1,28 +1,31 @@
 .pages {
+    background-color:#7A7999;
+    border-radius: 2%;
     display: flex;
-	height: 20px;
-    /* list-style-type:none; */
+	height: 25px;
     justify-content: center;
-	padding: 4px;
+    list-style-type:none; 
+	padding: 0px;
     margin: 0px;
 }
 
-.page {
-    list-style-type:none; 
-    margin: 1px;  
-}
-
 .pageBtn {
-    background-color:whitesmoke;
+    background-color:#7A7999;
     font-weight:bold;
     color: black;
     border: 0px;
 }
 
-.pageBtn :hover {
-    background-color:rgb(96, 136, 146);
+.pageBtn:hover {
+	background:linear-gradient(to bottom, #fb9e25, #ffc477);
+	background-color:#fb9e25;
     font-weight:bold;
     color: white;
-    border: 1px;
 }
 
+.pageBtn:focus {
+	background:linear-gradient(to bottom, #fb9e25, #ffc477);
+	background-color:#fb9e25;
+    font-weight:bold;
+    color: white;
+}

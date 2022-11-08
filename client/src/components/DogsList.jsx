@@ -23,11 +23,29 @@ export function ListDogs(){
     const [filteraz,setFilteraz] = useState('');
     const [filterlh,setFilterlh] = useState('');
     const [page, setPage] = useState(1);
+    const [pageprev, setPageprev] = useState(1);
+    const [pagenext, setPagenext] = useState(1);
     const [dogsPage] = useState(9);
     const totalpage = page * dogsPage;
     const firstdogPage = totalpage - dogsPage;
     const showDogPage = Dogs.slice(firstdogPage, totalpage);
-    const paged = function(pageNumber) {setPage(pageNumber)};
+    const paged = function(pageNumber,totpages){
+        setPage(pageNumber)
+        let currp=parseInt(pageNumber)
+        //pag prev y pag next
+        if (currp>1 && currp<totpages) {
+            setPageprev(currp-1);
+            setPagenext(currp+1);
+        }
+        if (currp===1 && currp<totpages) {
+            setPageprev(currp);
+            setPagenext(currp+1);
+        }   
+        if (currp>1 && currp===totpages) {
+            setPageprev(currp-1);
+            setPagenext(currp);
+        }              
+    };
 
     const dispatch = useDispatch();
 
@@ -97,7 +115,7 @@ export function ListDogs(){
                     <option value="H">From Heavy to Light</option>
                 </select>
                 <label className="filters"><strong>Temperament:</strong></label>
-                <select className="select" name="teempe" onChange={e => handleTempeeFilter(e,filteraz,filterlh)}>
+                <select className="select" name="teempe" onChange={e => handleTempeeFilter(e,filteraz,filterlh,pageprev,pagenext)}>
                     <option selected disabled>Please choose...</option>
                     {TemperList.map((t,index) => (
                         <option key={index} id={t.id} value={t.name} >{t.name}</option>
@@ -126,7 +144,7 @@ export function ListDogs(){
                 <aside className="conteiner__right"></aside>
             </main>
             {/* //COMPONENTE DE PAGINADO >>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
-            <Paged dogsPage={dogsPage} doglist={Dogs.length} paged={paged}/>
+            <Paged dogsPage={dogsPage} doglist={Dogs.length} paged={paged} pageprev={pageprev} pagenext={pagenext}/>
             {/* //FOOTER >>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
             <footer>
                 <p>© 2022 Rolandor25 - PI Henry Dogs Single Page Aplication</p>
