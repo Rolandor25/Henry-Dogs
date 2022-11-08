@@ -53,8 +53,25 @@ export default function rootReducer(state=initialState,action){
                 return 0;
             }) :
             state.Dogs.sort(function(a, b) {
-                if (a.weight < b.weight) return 1;
-                if (a.weight > b.weight) return -1;
+                //Weight to val A
+                    let SA2=0
+                    let SA1=a.weight.indexOf('-')
+                    if (SA1<0) {
+                        SA2=parseInt(a.weight.trim())
+                    }else{
+                        SA2=parseInt(a.weight.slice(0,SA1-1) )
+                    }
+                //Weight to val B
+                    let SB2=0
+                    let SB1=b.weight.indexOf('-')
+                    if (SB1<0) {
+                        SB2=parseInt(b.weight.trim())
+                    }else{
+                        SB2=parseInt(b.weight.slice(0,SB1-1) )
+                    }
+                //ORDENAMIENTO CON NUMERO INCIAL DE PESO
+                if (SA2 < SB2) return 1;
+                if (SA2 > SB2) return -1;
                 return 0;
             });          
             return {

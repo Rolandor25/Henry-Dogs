@@ -208,7 +208,7 @@ export default function CreateDog(){
                                 {/* BOTONES DEL FORMULARIO */}
                                 <tr>
                                     <td align="right" ><strong>Form Options:</strong></td>
-                                    <td><input type={'submit'}  value={'Create'}/>                                                             
+                                    <td><input type={'submit'} value={'Create'}/>                                                             
                                     <input type={'reset'}  value={'Reset'} onClick={handlereset}/></td>                          
                                 </tr> 
                             </table>

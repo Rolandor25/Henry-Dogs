@@ -1,6 +1,5 @@
 import React from "react";
 import './styles/paged.css';
-import { useSelector} from "react-redux";
 
 //MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWWMWWMWMWMW
 // BARRA DE PAGINADO

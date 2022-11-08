@@ -14,11 +14,14 @@ import'./styles/layout.css'
 export function ListDogs(){
 
     let prevId = 1
+    //
     const AllDogs = useSelector((state) => state.AllDogs);
     const Dogs = useSelector((state) => state.Dogs);
     const TemperList = useSelector((state) => state.Temper);
 
-    const [order,setOrder] = useState('')
+    const [order,setOrder] = useState('');
+    const [filteraz,setFilteraz] = useState('');
+    const [filterlh,setFilterlh] = useState('');
     const [page, setPage] = useState(1);
     const [dogsPage] = useState(9);
     const totalpage = page * dogsPage;
@@ -43,6 +46,7 @@ export function ListDogs(){
         function handleSortbyN(e){
             e.preventDefault();
             dispatch(sortbyNameDog(e.target.value))
+            setFilteraz(e.target.value)
             setPage(1);
             setOrder(`Order ${e.target.value}`);
         }
@@ -51,14 +55,17 @@ export function ListDogs(){
         function handleSortbyW(e){
             e.preventDefault();
             dispatch(sortbyWeigthDog(e.target.value))
+            setFilterlh(e.target.value)
             setPage(1);
             setOrder(`Order ${e.target.value}`);
         }  
 
         //FILTRO POR TEMPERAMENTO
-        function handleTempeeFilter(e){
+        function handleTempeeFilter(e,oa,ow){
             e.preventDefault();
-            dispatch(filterTempe(e.target.value))
+            dispatch(filterTempe(e.target.value,oa,ow))
+            if (oa!=="") dispatch(sortbyNameDog(oa))
+            if (ow!=="")dispatch(sortbyWeigthDog(ow))
             setPage(1);
         }
 
@@ -90,7 +97,7 @@ export function ListDogs(){
                     <option value="H">From Heavy to Light</option>
                 </select>
                 <label className="filters"><strong>Temperament:</strong></label>
-                <select className="select" name="teempe" onChange={e => handleTempeeFilter(e)}>
+                <select className="select" name="teempe" onChange={e => handleTempeeFilter(e,filteraz,filterlh)}>
                     <option selected disabled>Please choose...</option>
                     {TemperList.map((t,index) => (
                         <option key={index} id={t.id} value={t.name} >{t.name}</option>
