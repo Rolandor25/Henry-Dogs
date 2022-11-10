@@ -92,7 +92,7 @@
 }
 .refreshButton :hover {
     color:#ffffff;
-    background-color: rgb(96, 136, 146);
+    background-color: rgb(122, 121, 153);
 }
 .refreshDelButton {
     color: rgb(5, 0, 0);
@@ -111,7 +111,7 @@
 }
 .refreshDelButton:hover {
     color:#ffffff;
-    background-color: rgb(96, 136, 146);
+    background-color: rgb(122, 121, 153);
 }
 /*MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMW*/
 /* ESTILOS DE LAYOUT PRINCIPAL */
@@ -210,7 +210,7 @@
 }
 
 /*MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMW*/
-/* ESTILOS DE LAYOUT CARD'S DE RECETAS */
+/* ESTILOS DE LAYOUT CARD'S DE PERROS */
 /*MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMW*/
 .content_card {
     background-color: rgb(255, 255, 255,0.80);
@@ -235,7 +235,7 @@
 }
 
 /*MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMW*/
-/* ESTILOS DE LAYOUT CARD'S DE DETALLE DE RECETA */
+/* ESTILOS DE LAYOUT CARD'S DE DETALLE DE PERROS */
 /*MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMW*/
 .content_card_d {
     background-color: rgb(255, 255, 255,0.80);
@@ -297,7 +297,7 @@
 } 
 
 /*MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMW*/
-/* ESTILOS DE LAYOUT FORMULARO DE CREACION DE RECETA */
+/* ESTILOS DE LAYOUT FORMULARO DE CREACION DE PERROS */
 /*MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMW*/
 .conteiner__middle_f {
     display: flex;
@@ -306,7 +306,7 @@
     justify-items:stretch;
     align-items: stretch;
     padding: 20px; 
-    background-color: rgb(255, 255, 255,0.70);
+    background-color: rgb(122, 121, 153,0.30);
     top: 50%;
     left: 50%;
 }
@@ -315,11 +315,15 @@
     font-weight: 700;
     font-size:xx-large;
 }
-.conteiner_input[type="text"] {/* ESTILO DE INPUTTEXT */
-    width: 400px;
+.conteiner_input {/* ESTILO DE INPUTTEXT */
+    width: 600px;
+    height: 30px;
+    font-weight: 700;
 }
-.conteiner_inputnum[type="number"] {/* ESTILO DE INPUT NUMERICO */
-    width: 400px;
+.conteiner_selectorlist {/* ESTILO DE INPUTTEXT */
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: 700;
 }
 .chkcolor{/* ESTILO DEL CHKBOX MARCADO */
     color:  rgb(96, 136, 146);

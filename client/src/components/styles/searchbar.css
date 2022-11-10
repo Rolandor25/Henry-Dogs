@@ -18,6 +18,11 @@
     background-color: rgb(96, 136, 146);
 }
 
+.searchButton:disabled{
+    opacity: 50%;
+    cursor: not-allowed;
+}
+
 .search {
     display: flex;
     padding-left: 10px;

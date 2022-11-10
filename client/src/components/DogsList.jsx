@@ -24,7 +24,7 @@ export function ListDogs(){
     const [filterlh,setFilterlh] = useState('');
     const [page, setPage] = useState(1);
     const [pageprev, setPageprev] = useState(1);
-    const [pagenext, setPagenext] = useState(1);
+    const [pagenext, setPagenext] = useState(2);
     const [dogsPage] = useState(9);
     const totalpage = page * dogsPage;
     const firstdogPage = totalpage - dogsPage;
