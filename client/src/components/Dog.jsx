@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import { useSelector ,useDispatch } from "react-redux";
-import { getDog } from '../redux/actions'
+import { getDog,deleteDog } from '../redux/actions'
 
 
 //MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWWMWWMWMWMW
@@ -11,6 +12,7 @@ export default function DogDetail(props){
   let dispatch=useDispatch()
   let id_detail= props.match.params.id
   let imgtoshow="https://img.freepik.com/free-vector/cute-chihuahua-dog-peeking-waving-paw-cartoon-vector-illustration_42750-943.jpg"
+  const history=useHistory()
 
   //SE CAPTURA LA INFORMACION DEL PERRO
   useEffect(() => {
@@ -20,7 +22,20 @@ export default function DogDetail(props){
   //ASIGNO A DOG EL DETALLE PASSSADO POR EL BACK
   const Dog = useSelector(state => state.Dog);
 
-  //SE MUESTRA UNA IMAGEN POR DEFECTO
+  //SE ELIMINA LA RAZA
+  function handleDel(event){
+    event.preventDefault()
+    dispatch(deleteDog(id_detail))
+    alert('The Dog was deleted successfully!') 
+    history.push('/dogs'); 
+  }
+
+  //SE MODIFICA LA RAZA
+  function handleMod(event){
+    alert('Now you can modify the Dog Information!') 
+    history.push(`/dogs/create/`,Dog); 
+  }
+
 //******************** RENDERIZADO DEL DETALLE ********************/
   return(
     <div className="conteiner">
@@ -37,11 +52,11 @@ export default function DogDetail(props){
               {
                  Dog.length? ( 
                  <div className="content_card_d">
-                    <h1 className='detTittle'>{Dog[0].name}</h1>
+                    <h1 className='detTittle'>{Dog[0].name}</h1>                  
                     {/* // CONTENIDO DE COL IZQUIERDA  */}
                     <div className='conteiner__colLft'>
                       <img src={Dog[0].image} alt={imgtoshow} height="400" width="440"/>
-                    </div>
+                    </div>                      
                     {/* // CONTENIDO DE COL DERECHA  */}
                     <div className='conteiner__colRgt'>
                       <h2>Weight: </h2>{Dog[0].weight} Kg
@@ -49,6 +64,18 @@ export default function DogDetail(props){
                       <h2>Life Span: </h2>{Dog[0].life_span} 
                       <h2>Temperaments:</h2>
                       <h3> {Dog[0].temperament}</h3>
+                      <div>
+                        <br/>
+                        {
+                          isNaN(Dog.id) && ( 
+                            <div>
+                              <button id='UpdtButton' className='refreshDelButton' onClick={handleMod}>Modificar</button>
+                              <button id='DelButton' className='refreshDelButton' onClick={handleDel}>Eliminar</button>
+                            </div>
+                          )
+                        }
+                      </div>
+
                     </div>
                   </div>):null
               }

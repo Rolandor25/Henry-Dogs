@@ -53,12 +53,13 @@ router.put('/dogs/updt',async(req,res)=>{
 })
 
 //BORRA PERROS -------------------------------------------------------------------
-router.delete('/dogs/del',async(req,res)=>{
-    let {id}=req.body
+router.delete('/dogs/del/:id',async(req,res)=>{
+    let {id}=req.params
+    console.log(id)
     try {
         return res.status(200).json(await RoutFunc.delldog(id))
     } catch (error) {
-        return res.status(400).send("Sorry the information couldn't be detete")
+        return error
     }
 })
 

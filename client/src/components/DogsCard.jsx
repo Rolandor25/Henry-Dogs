@@ -14,6 +14,7 @@ export default function DogsCard({id,image,name,weight,temperament}){
   }
   return(
     <div > 
+      
       <div className="content_card">
         <img src={imgtoshow} alt="" />
         <Link to={`/dogs/id/${id}`}> <h3>{name}</h3> </Link>

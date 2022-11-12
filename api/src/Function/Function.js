@@ -13,17 +13,17 @@ module.exports = {
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     getdoglist: async function () {
         //Data de la API -------------------------------------------------------------------
-        const apidata = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
-        const apidogs = apidata.data.map(d=>{
-            return{
-                id:d.id,
-                image:d.image.url,
-                name:d.name,
-                temperament:d.temperament,
-                weight:d.weight.metric,
-            }
-        })
-        
+        // const apidata = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
+        // const apidogs = apidata.data.map(d=>{
+        //     return{
+        //         id:d.id,
+        //         image:d.image.url,
+        //         name:d.name,
+        //         temperament:d.temperament,
+        //         weight:d.weight.metric,
+        //     }
+        // })
+        apidogs=[]
         //Data de la DB -------------------------------------------------------------------
         const dbdogs_raw= await Dog.findAll({
             attributes:['id','image','name','weight'],
@@ -199,7 +199,7 @@ module.exports = {
     //ACTUALIZO REGISTRO DE PERRO EN LA DB ========================================================
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    updatedogs: async function(id,image,name,weight,height,life_span,tempe){
+    updatedogs: async function(id,image,name,weight,height,life_span,temperament){
         const toupdtdog= await Dog.findByPk(id,{
             include: {
                 model: Temperamento,
@@ -209,17 +209,17 @@ module.exports = {
                 }
             } 
         })
-        console.log(toupdtdog)
         await toupdtdog.update({image,name,weight,height,life_span})
+        console.log(temperament.length)
         await toupdtdog.setTemperamentos([])
-        if (tempe.length) {
+        if (temperament.length) {
             for (let i = 0; i < tempe.length; i++) {
                 var newtempe = await Temperamento.findOne({
                     where: {
-                        name: tempe[i]
+                        name: temperament[i]
                     }
                 })
-                await toupdtdog.addtempermentos(newtempe.id)
+                await toupdtdog.addTempermentos(newtempe.id)
             }            
         } 
         return ({message: "The Information was successfully Updated"})

@@ -47,6 +47,16 @@ export function createDog(payload){
     }        
 }
 
+export function deleteDog(id) {
+    return async function (dispatch) {
+        try {
+            return await axios.delete(`http://localhost:3001/dogs/del/${id}`);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
 export function sortbyNameDog(payload){
     return {
         type: 'SBN',
