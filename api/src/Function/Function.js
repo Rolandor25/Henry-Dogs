@@ -13,17 +13,17 @@ module.exports = {
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     getdoglist: async function () {
         //Data de la API -------------------------------------------------------------------
-        // const apidata = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
-        // const apidogs = apidata.data.map(d=>{
-        //     return{
-        //         id:d.id,
-        //         image:d.image.url,
-        //         name:d.name,
-        //         temperament:d.temperament,
-        //         weight:d.weight.metric,
-        //     }
-        // })
-        apidogs=[]
+        const apidata = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
+        const apidogs = apidata.data.map(d=>{
+            return{
+                id:d.id,
+                image:d.image.url,
+                name:d.name,
+                temperament:d.temperament,
+                weight:d.weight.metric,
+            }
+        })
+        // apidogs=[]
         //Data de la DB -------------------------------------------------------------------
         const dbdogs_raw= await Dog.findAll({
             attributes:['id','image','name','weight'],

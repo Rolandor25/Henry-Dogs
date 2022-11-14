@@ -71,7 +71,7 @@ export default function DogDetail(props){
                       <div>
                         <br/>
                         {
-                          isNaN(Dog.id) && ( 
+                          isNaN(Dog[0].id) && ( 
                             <div>
                               <button id='UpdtButton' className='refreshDelButton' onClick={handleMod}>Modificar</button>
                               <button id='DelButton' className='refreshDelButton' onClick={handleDel}>Eliminar</button>
