@@ -32,8 +32,12 @@ export default function DogDetail(props){
 
   //SE MODIFICA LA RAZA
   function handleMod(event){
+    event.preventDefault()
     alert('Now you can modify the Dog Information!') 
-    history.push(`/dogs/create/`,Dog); 
+    let ttt=Dog[0].temperament
+    let arrtempe=ttt.split(",")
+    let DogtoMod={id:Dog[0].id,name:Dog[0].name,weight:Dog[0].weight,height:Dog[0].height,image:Dog[0].image,life_span:Dog[0].life_span,temperament:arrtempe}
+    history.push(`/dogs/new/`,DogtoMod); 
   }
 
 //******************** RENDERIZADO DEL DETALLE ********************/

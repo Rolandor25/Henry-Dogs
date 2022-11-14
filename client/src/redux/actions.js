@@ -35,11 +35,16 @@ export function getTemper(){
     }
 }
 
-export function createDog(payload){
+export function createDog(payload,createmode){
     return async function(dispatch) {
         var response
         try {
-            response = await axios.post('http://localhost:3001/dogs/new', payload);
+            if (createmode===true) {
+               response = await axios.post('http://localhost:3001/dogs/new', payload); 
+            }else{
+               response = await axios.put('http://localhost:3001/dogs/updt', payload); 
+            }
+            
             return response;
         } catch (error) {
             console.log(error)

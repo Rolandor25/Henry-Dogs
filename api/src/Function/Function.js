@@ -200,6 +200,7 @@ module.exports = {
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     updatedogs: async function(id,image,name,weight,height,life_span,temperament){
+        console.log(temperament)
         const toupdtdog= await Dog.findByPk(id,{
             include: {
                 model: Temperamento,
@@ -210,19 +211,18 @@ module.exports = {
             } 
         })
         await toupdtdog.update({image,name,weight,height,life_span})
-        console.log(temperament.length)
         await toupdtdog.setTemperamentos([])
         if (temperament.length) {
-            for (let i = 0; i < tempe.length; i++) {
+            for (let i = 0; i < temperament.length; i++) {
                 var newtempe = await Temperamento.findOne({
                     where: {
                         name: temperament[i]
                     }
                 })
-                await toupdtdog.addTempermentos(newtempe.id)
+                await toupdtdog.addTemperamento(newtempe.id)
             }            
         } 
-        return ({message: "The Information was successfully Updated"})
+        return ("The Information was successfully Updated")
     },
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

@@ -11,13 +11,11 @@ import'./styles/searchbar.css'
 // FORMULARIO DE CREACION DE RECCETA
 //MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWWMWWMWMWMW
 
-var buttonstate=true
-
 //VALIDACIONES DEL FORMULARIO
-function FormErr(input,racelist) {
+function FormErr(input,racelist,Dogtoupdt) {
     let errors = {};
     if (!input.name) errors.name = 'Please enter a Dog Breed'; 
-    if (input.name && racelist.indexOf(input.name) > -1) errors.name = 'This Dog Breed Already Exists'; 
+    if (input.name && racelist.indexOf(input.name) > -1 && Dogtoupdt==null) errors.name = 'This Dog Breed Already Exists'; 
     if (!/^[a-zA-Z]+$/g.test(input.name)) errors.name = 'Please use only Text to the breed Name ';
 
     if (!/^\d\d(?:\s\-\s\d\d)?$/.test(input.weight)) errors.weight = 'Please use only Nubers and/or dash separators (## o ## - ##)';
@@ -36,8 +34,9 @@ function FormErr(input,racelist) {
     return errors;
 }
 
-export default function CreateDog(){
+export default function CreateDog(props){
     // SETEO ESTADOS INIIALES DE COMPONENTES DEL FORMULARIO
+    const Dogtoupdt=props.location.state
     const [errors, setErrors] = useState({})
     let okMsg;
     const dispatch = useDispatch();
@@ -51,17 +50,30 @@ export default function CreateDog(){
         dispatch(getTemper())
     }, [dispatch]);  
 
-    //VALIDACION DE MODO DE TRABAJO / CREACION O MODIFICACION
+    //VALIDACION DE MODO DE TRABAJO / CREACION O MODIFICACION PARA RENDERIZAR LA INFORMACION
     let paquete
-    let image,name,weight,height,life_span,temperament
-        okMsg='New recipe added successfully!'
+    let id,image,name,weight,height,life_span,temperament
+    if (Dogtoupdt!==null) {
+        id=Dogtoupdt.id;
+        name=Dogtoupdt.name;
+        image=Dogtoupdt.image;
+        height=Dogtoupdt.height;
+        weight=Dogtoupdt.weight;
+        life_span=Dogtoupdt.life_span;
+        temperament=[];
+        paquete={id:id,name:name,image:image,height:height,weight:weight,life_span:life_span,temperament:temperament} 
+        okMsg='Te information was updated successfully!'
+    }else{
+        id='';
         name='';
         image='';
         height='';
         weight='';
         life_span='';
         temperament=[];
-        paquete={name:name,image:image,height:height,weight:weight,life_span:life_span,temperament:temperament}  
+        paquete={name:name,image:image,height:height,weight:weight,life_span:life_span,temperament:temperament}   
+        okMsg='Te information was created successfully!'
+    }
     let[input,setInput]=useState(paquete);
 
     //MANEJADOR DE EVENTOS DE CAMBIO EN CAMPOS IMPUTS
@@ -69,7 +81,7 @@ export default function CreateDog(){
         event.preventDefault();
         setInput((prev) => {   
             const DogCreated = {...prev,[event.target.name]: event.target.value}
-            const validations = FormErr(DogCreated,racelist);
+            const validations = FormErr(DogCreated,racelist,Dogtoupdt);
             setErrors(validations)
             return DogCreated
         });
@@ -79,12 +91,13 @@ export default function CreateDog(){
     let handleList = (event) => {
         if (event.target.value!=='Please choose...'){
             let tempes=[]
+            // tempes=input.temperament.concat(event.target.value)
             tempes=input.temperament.concat(event.target.value)
             setInput({
                 ...input,
                 temperament:tempes
             });
-            const validations = FormErr(input,racelist);
+            const validations = FormErr(input,racelist,Dogtoupdt);
             setErrors(validations)          
         }
     };
@@ -94,15 +107,24 @@ export default function CreateDog(){
         return (
             errors.title ||
             errors.weight ||
-            errors.temperament);
+            errors.temperament
+        );
     }
 
     //MANEJADOR DE SUBMIT DEL FORM
     function handlesubmit(event){
         event.preventDefault(input.name)  
+        let createmode
         let PAC
-        PAC={name:input.name, weight:input.weight, height:input.height, image:input.image, life_span:input.life_span, temperament:input.temperament}
-        dispatch(createDog(PAC))
+        if (Dogtoupdt!==null) {
+            console.log(input.temperament)
+            PAC={id:Dogtoupdt.id, name:input.name, weight:input.weight, height:input.height, image:input.image, life_span:input.life_span, temperament:input.temperament}
+            createmode=false
+        }else{
+            PAC={name:input.name, weight:input.weight, height:input.height, image:input.image, life_span:input.life_span, temperament:input.temperament}
+            createmode=true
+        }    
+        dispatch(createDog(PAC,createmode))
         setInput({name:'',weight:'',height:'',life_span:'',image:'',temperament:[]})//Limpio el Form despues de guardar   
         alert(okMsg) 
         history.push('/dogs');  
@@ -226,7 +248,7 @@ export default function CreateDog(){
                                 {/* BOTONES DEL FORMULARIO */}
                                 <tr>
                                     <td align="right" ><strong>Form Options:</strong></td>
-                                    <td><input className="searchButton" type={'submit'} value={'Create'} disabled={edosubmit()}/>                                                             
+                                    <td><input className="searchButton" type={'submit'} value={'Save'} disabled={edosubmit()}/>                                                             
                                     <input className="searchButton" type={'reset'}  value={'Reset'} onClick={handlereset}/></td>                          
                                 </tr> 
                             </table>
