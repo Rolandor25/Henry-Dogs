@@ -60,7 +60,8 @@ export default function CreateDog(props){
         height=Dogtoupdt.height;
         weight=Dogtoupdt.weight;
         life_span=Dogtoupdt.life_span;
-        temperament=[];
+        temperament=[]
+        temperament=Dogtoupdt.temperament;
         paquete={id:id,name:name,image:image,height:height,weight:weight,life_span:life_span,temperament:temperament} 
         okMsg='Te information was updated successfully!'
     }else{
@@ -90,9 +91,17 @@ export default function CreateDog(props){
     //MANEJADOR DE EVENTOS DE LISTBOX
     let handleList = (event) => {
         if (event.target.value!=='Please choose...'){
-            let tempes=[]
-            // tempes=input.temperament.concat(event.target.value)
-            tempes=input.temperament.concat(event.target.value)
+            //let tempes=[]
+            //tempes=input.temperament.concat(event.target.value)
+
+            let tempes=input.temperament
+            let listval
+            if (event.target.name=='temp1') listval=0
+            if (event.target.name=='temp2') listval=1
+            if (event.target.name=='temp3') listval=2
+            if (event.target.name=='temp4') listval=3
+            tempes[listval]=event.target.value
+
             setInput({
                 ...input,
                 temperament:tempes
@@ -117,7 +126,6 @@ export default function CreateDog(props){
         let createmode
         let PAC
         if (Dogtoupdt!==null) {
-            console.log(input.temperament)
             PAC={id:Dogtoupdt.id, name:input.name, weight:input.weight, height:input.height, image:input.image, life_span:input.life_span, temperament:input.temperament}
             createmode=false
         }else{
@@ -207,7 +215,7 @@ export default function CreateDog(props){
                                 <tr>
                                     <td align="right"><strong>Temperaments:*</strong></td>
                                     <td className="conteiner_selectorlist">
-                                        <select className="conteiner_input" name={'temp1'} onClick={handleList}> 
+                                        <select className="conteiner_input" name={'temp1'} value={input.temperament[0]} onChange={handleList}> 
                                             <option selected disabled>Please choose...</option>
                                             {TemperList.map((t,index) => (
                                                 <option key={index} id={t.id} value={t.name} >{t.name}</option>
@@ -215,7 +223,7 @@ export default function CreateDog(props){
                                         </select>
                                         <div></div>
 
-                                        <select className="conteiner_input" name={'temp2'} onClick={handleList}>
+                                        <select className="conteiner_input" name={'temp2'} value={input.temperament[1]}  onChange={handleList}>
                                             <option selected disabled>Please choose...</option>
                                             {TemperList.map((t,index) => (
                                                 <option key={index} id={t.id} value={t.name} onChange={handleList}>{t.name}</option>
@@ -223,7 +231,7 @@ export default function CreateDog(props){
                                         </select>
                                         <div></div>
 
-                                        <select className="conteiner_input" name={'temp3'} onClick={handleList}>
+                                        <select className="conteiner_input" name={'temp3'} value={input.temperament[2]}  onChange={handleList}>
                                             <option selected disabled>Please choose...</option>
                                             {TemperList.map((t,index) => (
                                                 <option key={index} id={t.id} value={t.name} onSelect={handleList}>{t.name}</option>
@@ -231,7 +239,7 @@ export default function CreateDog(props){
                                         </select>
                                         <div></div>     
 
-                                        <select className="conteiner_input" name={'temp4'} onClick={handleList}>
+                                        <select className="conteiner_input" name={'temp4'} value={input.temperament[3]}  onChange={handleList}>
                                             <option selected disabled>Please choose...</option>
                                             {TemperList.map((t,index) => (
                                                 <option key={index} id={t.id} value={t.name}>{t.name}</option>

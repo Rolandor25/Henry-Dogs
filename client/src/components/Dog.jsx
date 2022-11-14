@@ -40,6 +40,14 @@ export default function DogDetail(props){
     history.push(`/dogs/new/`,DogtoMod); 
   }
 
+  //VALIDO IMAGEN EXISTENTE O DEFAULT
+  if(Dog.length && Dog[0].image!==""){
+    imgtoshow=Dog[0].image
+  }else{
+    imgtoshow="https://img.freepik.com/free-vector/cute-chihuahua-dog-peeking-waving-paw-cartoon-vector-illustration_42750-943.jpg"
+  }
+
+
 //******************** RENDERIZADO DEL DETALLE ********************/
   return(
     <div className="conteiner">
@@ -59,7 +67,7 @@ export default function DogDetail(props){
                     <h1 className='detTittle'>{Dog[0].name}</h1>                  
                     {/* // CONTENIDO DE COL IZQUIERDA  */}
                     <div className='conteiner__colLft'>
-                      <img src={Dog[0].image} alt={imgtoshow} height="400" width="440"/>
+                      <img src={imgtoshow} alt={imgtoshow} height="400" width="440"/>
                     </div>                      
                     {/* // CONTENIDO DE COL DERECHA  */}
                     <div className='conteiner__colRgt'>
